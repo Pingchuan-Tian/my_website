@@ -212,7 +212,7 @@ disqusShortname = ""
 
     [[params.footer.social]]
       icon = "fa-linkedin"
-      url= "linkedin.com/in/平川-田-19916a184"
+      url= "https://www.linkedin.com/in/%E5%B9%B3%E5%B7%9D-%E7%94%B0-19916a184/"
       label = "LinkedIn"
 
     [[params.footer.quicklinks]]
