@@ -1,0 +1,182 @@
+---
+categories:
+- ""
+- ""
+date: "2020-10-4"
+description: Let's explore more about movies!
+draft: false
+image: pic07.jpg
+keywords: ""
+slug: project2
+title: Analysis of movies- IMDB dataset
+---
+
+
+```{r, setup, echo=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE, 
+  warning = FALSE, 
+  tidy=FALSE,     # display code as typed
+  size="small")   # slightly smaller font for code
+options(digits = 3)
+
+# default figure size
+knitr::opts_chunk$set(
+  fig.width=6.75, 
+  fig.height=6.75,
+  fig.align = "center"
+)
+```
+
+
+```{r load-libraries, warning=FALSE, message=FALSE, echo=FALSE}
+library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
+library(mosaic)
+library(ggthemes)
+library(lubridate)
+library(fivethirtyeight)
+library(here)
+library(skimr)
+library(janitor)
+library(vroom)
+library(tidyquant)
+library(rvest)    # scrape websites
+library(purrr)  
+library(lubridate) #to handle dates
+```
+
+# Analysis of movies- IMDB dataset
+
+We will look at a subset sample of movies, taken from the [Kaggle IMDB 5000 movie dataset](https://www.kaggle.com/carolzhangdc/imdb-5000-movie-dataset)
+
+  
+```{r,load_movies, warning=FALSE, message=FALSE, eval=FALSE}
+
+movies <- read_csv(here::here("data", "movies.csv"))
+glimpse(movies)
+
+```
+
+Besides the obvious variables of `title`, `genre`, `director`, `year`, and `duration`, the rest of the variables are as follows:
+
+- `gross` : The gross earnings in the US box office, not adjusted for inflation
+- `budget`: The movie's budget 
+- `cast_facebook_likes`: the number of facebook likes cast memebrs received
+- `votes`: the number of people who voted for (or rated) the movie in IMDB 
+- `reviews`: the number of reviews for that movie
+- `rating`: IMDB average rating 
+
+## Use your data import, inspection, and cleaning skills to answer the following:
+
+- Are there any missing values (NAs)? Are all entries distinct or are there duplicate entries?
+```{r, skim_movies}
+movies <- read_csv(here::here("data", "movies.csv"))
+skim(movies)
+
+```
+> There are no missing values. And there are duplicate entries, because there are 2907 distinct titles, but there are 2961 rows in total.
+
+- Produce a table with the count of movies by genre, ranked in descending order
+``` {r,count_by_genre}
+movies <- read_csv(here::here("data", "movies.csv"))
+movies_1<-movies%>%
+group_by(genre)%>%
+count()
+arrange(movies_1,desc(n))
+```
+
+- Produce a table with the average gross earning and budget (`gross` and `budget`) by genre. Calculate a variable `return_on_budget` which shows how many $ did a movie make at the box office for each $ of its budget. Ranked genres by this `return_on_budget` in descending order
+```{r,gross&budget,return_on_budget}
+movies <- read_csv(here::here("data", "movies.csv"))
+movies_2<-movies%>%
+group_by(genre)
+summarise(movies_2,avg_gross=mean(gross),avg_budget=mean(budget))
+ 
+movies_3<-mutate(movies,return_on_budget=gross/budget)
+movies_3
+movies_4<-movies_3%>%
+group_by(genre)%>%
+summarise(avg_return_on_budget=mean(return_on_budget))
+arrange(movies_4,desc(avg_return_on_budget))
+```
+
+
+
+- Produce a table that shows the top 15 directors who have created the highest gross revenue in the box office. Don't just show the total gross amount, but also the mean, median, and standard deviation per director.
+```{r,directors}
+movies <- read_csv(here::here("data", "movies.csv"))
+movies_5<-movies_3%>%
+group_by(director)%>%
+summarise(total_gross=sum(gross),avg_gross=mean(gross),
+med_gross=median(gross),sd_gross=sd(gross))
+movies_6<-arrange(movies_5,desc(total_gross))
+head(movies_6,n=15)
+```
+
+- Finally, ratings. Produce a table that describes how ratings are distributed by genre. We don't want just the mean, but also, min, max, median, SD and some kind of a histogram or density graph that visually shows how ratings are distributed. 
+```{r,ratings}
+movies <- read_csv(here::here("data", "movies.csv"))
+movies_7<-movies_3%>%
+group_by(genre)%>%
+summarise(mean_rating=mean(rating),min_rating=min(rating),
+max_rating=max(rating),med_rating=median(rating),
+sd_rating=sd(rating))
+movies_7
+ggplot(movies_7,aes(x=mean_rating))+
+geom_density()+labs(title="the Histogram Distribution of Ratings for Genres",
+x="the mean rating for each genre")
+```
+
+## Use `ggplot` to answer the following
+
+  - Examine the relationship between `gross` and `cast_facebook_likes`. Produce a scatterplot and write one sentence discussing whether the number of facebook likes that the cast has received is likely to be a good predictor of how much money a movie will make at the box office. What variable are you going to map to the Y- and X- axes?
+  
+  
+```{r, gross_on_fblikes}
+plot1<- ggplot(data = movies_3, 
+mapping = aes(x = cast_facebook_likes, y = gross))+
+geom_point() +geom_smooth(se = FALSE)+scale_x_log10() +
+labs(title = "Relationship between the Number of Facebook Likes and Gross Earnings ",
+x = "the number of facebook likes ",y = "gross earnings in the box office") +NULL
+plot1
+
+```
+
+> According to the upward slope of the plot, there is a positive correlation between the number of facebook likes and the money a movie will make at the box office, so the number of facebook likes that the cast has received is likely to be a good predictor of the money a movie will make at the box office. I am going to map the number of facebook likes to the X- axis, and the gross earnings in the box office  to the Y- axis.
+
+  - Examine the relationship between `gross` and `budget`. Produce a scatterplot and write one sentence discussing whether budget is likely to be a good predictor of how much money a movie will make at the box office.
+
+```{r, gross_on_budget}
+plot2<- ggplot(data = movies_3, mapping = aes(x = budget, y = gross))+
+geom_point() +geom_smooth(se = FALSE)+scale_x_log10()+
+labs(title = "Relationship between Budget and Gross Earnings ",
+x = "budget" ,y = "gross earnings in the box office") +NULL
+plot2
+
+```
+
+> According to the upward slope of the plot, there is a positive correlation between budget and the money a movie will make at the box office, so budget is likely to be a good predictor of the money a movie will make.
+
+  - Examine the relationship between `gross` and `rating`. Produce a scatterplot, faceted by `genre` and discuss whether IMDB ratings are likely to be a good predictor of how much money a movie will make at the box office. Is there anything strange in this dataset?
+
+```{r, gross_on_rating}
+plot3<- ggplot(data = movies_3, mapping = aes(x = rating, y = gross))+
+geom_point() +geom_smooth(se = FALSE)+facet_wrap(~genre)+
+labs(title = "Relationship between Ratings and Gross Earnings ",
+x = "ratings" ,y = "gross earnings in the box office") +NULL
+plot3
+
+```
+
+> For some genres such as action, adventure and comedy, the slopes of the plots are upward sloping. For some genres such as drama, fantasy and horror, the slopes are relatively flat. For some genres such as mystery and Sci-Fi,there is a fluctuation. And for documentary, the slope is even downward sloping, suggesting a negative correlation between ratings and gross earnings in the box office. This is the phenomenon that is strange in this dataset. Therefore, IMDB ratings are not likely to be a good predictor of the money a movie will make at the box office.
+
+
+
+
+
+
+
+
+
+
+
