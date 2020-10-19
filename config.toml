@@ -2,7 +2,7 @@
 baseURL = "https://pingchuan-tian.netlify.app/"
 languageCode = "en-us"
 title = "Pingchuan Tian"
-theme = "forty"
+theme = "LBS"
 
 # Enter your tracking code to enable Google Analytics
 googleAnalytics = ""
@@ -37,7 +37,7 @@ disqusShortname = ""
 
   # Navigation Section
   [params.navigation]
-    title = "Forty"
+    title = "LBS"
     subtitle = "By HTML5 Up"
     menu = "Menu"
     # Optional logo as brand stored in img/
@@ -128,7 +128,7 @@ disqusShortname = ""
   # Section Type Two
   [params.two]
     enable = true
-    title = "Personal CV and biography"
+    title = "Personal info and biography"
     subtitle = """Know more about me!"""
     buttonText = "Get Started"
     url = "projects/project5"
@@ -151,7 +151,7 @@ disqusShortname = ""
     # - send a dummy email yourself to confirm your account
     # - click the confirm link in the email from www.formspree.io
     # - you're done. Happy mailing!
-    # formEmail = "example@domain.com"
+     formEmail = "ptian.mfa2021@london.edu"
 
     # Contact Section
     # You can add multiple emails, phone numbers, or addresses
