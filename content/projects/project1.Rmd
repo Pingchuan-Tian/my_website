@@ -3,12 +3,12 @@ categories:
 - ""
 - ""
 date: "2020-10-4"
-description: Take a look at the demographic and economic info of different countries!
+description: Let's have a deep look into different countries!
 draft: false
 image: pic07.jpg
 keywords: ""
 slug: project1
-title: `gapminder` country comparison
+title: gapminder country comparison
 ---
 
 ```{r load-libraries, warning=FALSE, message=FALSE, echo=FALSE}
