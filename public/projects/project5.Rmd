@@ -19,7 +19,9 @@ library(here)
 ```
 
 ## CV of Pingchuan Tian
-![](CV.png)
+
+![](CV.png) 
+
 
 ## Biography of Pingchuan Tian
    
