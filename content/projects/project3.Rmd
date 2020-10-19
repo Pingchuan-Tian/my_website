@@ -5,7 +5,7 @@ categories:
 date: "2020-10-4"
 description: What is going on in the American Society?
 draft: false
-image: pic07.jpg
+image: picture03.jpg
 keywords: ""
 slug: project3
 title: General Social Survey (GSS)

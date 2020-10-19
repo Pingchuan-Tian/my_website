@@ -5,7 +5,7 @@ categories:
 date: "2020-10-4"
 description: Let's explore more about movies!
 draft: false
-image: pic07.jpg
+image: picture02.jpg
 keywords: ""
 slug: project2
 title: Analysis of movies- IMDB dataset

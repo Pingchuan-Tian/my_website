@@ -94,25 +94,25 @@ disqusShortname = ""
     [[params.tiles.showcase]]
       title = "`gapminder` country comparison"
       subtitle = "Take a look at the demographic and economic info of different countries!"
-      image = "pic01.jpg"
+      image = "picture01.jpg"
       url = "projects/project1"
 
     [[params.tiles.showcase]]
       title = "Analysis of movies- IMDB dataset"
       subtitle = "Let's explore more about movies!"
-      image = "pic02.jpg"
+      image = "picture02.jpg"
       url = "projects/project2"
 
     [[params.tiles.showcase]]
       title = "General Social Survey (GSS)"
       subtitle = "What is going on in the American Society?"
-      image = "pic03.jpg"
+      image = "picture03.jpg"
       url = "projects/project3"
 
     [[params.tiles.showcase]]
       title = "Youth Risk Behavior Surveillance"
       subtitle = "What are the health patterns of high schoolers?"
-      image = "pic04.jpg"
+      image = "picture04.jpg"
       url = "projects/project4"
 
     
