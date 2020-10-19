@@ -186,20 +186,20 @@ disqusShortname = ""
       url= "https://www.facebook.com/pingchuan.tian.5"
       label = "Facebook"
 
-    [[params.footer.social]]
-      icon = "fa-instagram"
-      url= "https://www.instagram.com/pingchuan_tian/"
-      label = "Instagram"
+    #[[params.footer.social]]
+      #icon = "fa-instagram"
+      #url= ""
+      #label = "Instagram"
     
     [[params.footer.social]]
       icon = "fa-github"
       url= "https://github.com/Pingchuan-Tian"
       label = "GitHub"
 
-    [[params.footer.social]]
-      icon = "fa-linkedin"
-      url= "https://www.linkedin.com/in/%E5%B9%B3%E5%B7%9D-%E7%94%B0-19916a184/"
-      label = "LinkedIn"
+    #[[params.footer.social]]
+      #icon = "fa-linkedin"
+      #url= ""
+      #label = "LinkedIn"
 
     [[params.footer.quicklinks]]
       text = "Design: "
