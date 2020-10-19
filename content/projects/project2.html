@@ -417,9 +417,9 @@ movies_7</code></pre>
 ## 15 Sci-Fi             6.66        5          8.2       6.4      1.09 
 ## 16 Thriller           4.8         4.8        4.8       4.8     NA    
 ## 17 Western            5.70        4.1        7.3       5.70     2.26</code></pre>
-<pre class="r"><code>ggplot(movies_7,aes(x=mean_rating))+
-geom_density()+labs(title=&quot;the Histogram Distribution of Ratings for Genres&quot;,
-x=&quot;the mean rating for each genre&quot;)</code></pre>
+<pre class="r"><code>ggplot(movies_3,aes(y=rating))+
+geom_boxplot()+facet_wrap(~genre)+labs(title=&quot;the Histogram Distribution of Ratings for Genres&quot;,
+x=&quot;the ratings for each genre&quot;)</code></pre>
 <p><img src="/projects/project2_files/figure-html/ratings-1.png" width="648" style="display: block; margin: auto;" /></p>
 </div>
 <div id="use-ggplot-to-answer-the-following" class="section level2">

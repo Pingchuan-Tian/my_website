@@ -122,9 +122,9 @@ summarise(mean_rating=mean(rating),min_rating=min(rating),
 max_rating=max(rating),med_rating=median(rating),
 sd_rating=sd(rating))
 movies_7
-ggplot(movies_7,aes(x=mean_rating))+
-geom_density()+labs(title="the Histogram Distribution of Ratings for Genres",
-x="the mean rating for each genre")
+ggplot(movies_3,aes(y=rating))+
+geom_boxplot()+facet_wrap(~genre)+labs(title="the Histogram Distribution of Ratings for Genres",
+x="the ratings for each genre")
 ```
 
 ## Use `ggplot` to answer the following
