@@ -154,7 +154,7 @@ disqusShortname = ""
   # Footer section
   [params.footer]
     enable = true
-    copyright = "Company Name"
+    copyright = "LBS"
 
     # Uses font awesome icons
     [[params.footer.social]]
@@ -184,5 +184,5 @@ disqusShortname = ""
 
     [[params.footer.quicklinks]]
       text = "Design: "
-      url= "https://www.html5up.net"
-      alt = "HTML5 UP"
+      url= "https://weibo.com/p/1005056109338243/home?from=page_100505&mod=TAB&is_all=1#place"
+      alt = "Pingchuan Tian"
