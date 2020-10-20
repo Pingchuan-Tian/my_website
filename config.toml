@@ -110,7 +110,7 @@ disqusShortname = ""
   [params.two]
     enable = true
     title = "Personal info and biography"
-    subtitle = """Click it! And you will Know more about me."""
+    subtitle = """Click it! And you will know more about me."""
     buttonText = "Get Started"
     url = "projects/project5"
 
