@@ -1,5 +1,5 @@
 ---
-title: "My CV and biography"
+title: "My biography"
 date: "2020-10-4"
 description: Please know more about me.
 draft: no
@@ -17,11 +17,6 @@ library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
 library(gapminder)  # gapminder dataset
 library(here)
 ```
-
-## CV of Pingchuan Tian
-
-![](CV.jpg)
-
 
 ## Biography of Pingchuan Tian
    
