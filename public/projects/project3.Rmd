@@ -43,15 +43,10 @@ library(vroom)
 ```
 
 
-
-
-
-# General Social Survey (GSS)
-
 The [General Social Survey (GSS)](http://www.gss.norc.org/) gathers data on American society in order to monitor and explain trends in attitudes, behaviours, and attributes. Many trends have been tracked for decades, so one can see the evolution of attitudes, etc in American Society.
 
 
-In this assignment we analyze data from the **2016 GSS sample data**, using it to estimate values of *population parameters* of interest about US adults. The GSS sample data file has 2867 observations of 935 variables, but we are only interested in very few of these variables and you are using a smaller file.
+We analyze data from the **2016 GSS sample data**, using it to estimate values of *population parameters* of interest about US adults. The GSS sample data file has 2867 observations of 935 variables, but we are only interested in very few of these variables and you are using a smaller file.
 
 
 ```{r, read_gss_data, cache=TRUE}
@@ -60,7 +55,7 @@ gss <- read_csv(here::here("data", "smallgss2016.csv"),
                        "No answer", "Not applicable"))
 ```
 
-You will also notice that many responses should not be taken into consideration, like "No Answer", "Don't Know", "Not applicable", "Refused to Answer".
+Notice that many responses should not be taken into consideration, like "No Answer", "Don't Know", "Not applicable", "Refused to Answer".
 
 We will be creating 95% confidence intervals for population parameters. The variables we have are the following:
 
@@ -73,7 +68,7 @@ We will be creating 95% confidence intervals for population parameters. The vari
 
 Can we estimate the *population* proportion of Snapchat or Instagram users in 2016?
 
-1. Create a  new variable, `snap_insta` that is *Yes* if the respondent reported using any of Snapchat (`snapchat`) or Instagram (`instagrm`), and *No* if not. If the recorded value was NA for both of these questions, the value in your new variable should also be NA.
+1. Create a  new variable, `snap_insta` that is *Yes* if the respondent reported using any of Snapchat (`snapchat`) or Instagram (`instagrm`), and *No* if not. If the recorded value was NA for both of these questions, the value in our new variable should also be NA.
 
 ``` {r,snap_insta}
 gss<-gss %>%
@@ -117,7 +112,7 @@ c("Lt high school","High School","Junior college",
 "Bachelor","Graduate"))
 ```
 
-1. Create a  new variable, `bachelor_graduate` that is *Yes* if the respondent has either a `Bachelor` or `Graduate` degree. As before, if the recorded value for either was NA, the value in your new variable should also be NA.
+1. Create a  new variable, `bachelor_graduate` that is *Yes* if the respondent has either a `Bachelor` or `Graduate` degree. As before, if the recorded value for either was NA, the value in our new variable should also be NA.
 
 ```{r,bachelor_graduate}
 gss <- gss %>%
@@ -141,7 +136,9 @@ filter(twitter=="No") %>%
 summarise(bachelor_yes=count(bachelor_graduate == "Yes")/
 count(bachelor_graduate, na.rm ==TRUE))
 ```
+
 1. Using the CI formula for proportions, please construct two 95% CIs for `bachelor_graduate` vs whether they use (Yes) and don't (No) use twitter. 
+
 ```{r,bachelor_CI}
 degree_formula_ci_Yes<-gss %>%
 filter(twitter=="Yes") %>%
@@ -190,7 +187,7 @@ Can we estimate the *population* parameter on time spent on email weekly?
  
 ```
 
-1. Visualise the distribution of this new variable. Find the mean and the median number of minutes respondents spend on email weekly. Is the mean or the median a better measure of the typical amount of time Americans spend on email weekly? Why?
+1. Visualise the distribution of this new variable. Find the mean and the median number of minutes respondents spend on email weekly. 
 ```{r,distribution_email}
 
 ggplot(gss,mapping=aes(x=email))+
@@ -208,7 +205,7 @@ skim(gss$email)
 
 > The median is a better measure of the typical amount of time Americans spend on email weekly,because the graph is right-skewed and in the distribution there are a large amount of big values.For instance, there are 221 out of 1649 (=2867-1218) values that are more than 1000. These values will pull up the mean but the median is not affected.
 
-1. Using the `infer` package, calculate a 95% bootstrap confidence interval for the mean amount of time Americans spend on email weekly. Interpret this interval in context of the data, reporting its endpoints in “humanized” units (e.g. instead of 108 minutes, report 1 hr and 8 minutes). If you get a result that seems a bit odd, discuss why you think this might be the case.
+1. Using the `infer` package, calculate a 95% bootstrap confidence interval for the mean amount of time Americans spend on email weekly. Interpret this interval in context of the data, reporting its endpoints in “humanized” units (e.g. instead of 108 minutes, report 1 hr and 8 minutes). 
 ```{r,bootstrap_CI_email}
 library(infer)
 set.seed(1234)
@@ -224,8 +221,6 @@ percentile_ci
 > We are 95% confident that the interval (6 hours and 25 minutes, 7 hours and 32 minutes) capture the true mean amount of time Americans spend on email weekly. The thing that is odd is that the 95% confident interval doesn't include the median. And that is because there are a large amount of extreme values.
 
 
-1. Would you expect a 99% confidence interval to be wider or narrower than the interval you calculated above? Explain your reasoning.
-
-> A 99% confidence interval will be wider bacause a wider CI can make sure that about 99% (a higher percentage) of the CIs generated from the samples capture the true mean value.
+> And a 99% confidence interval will be wider bacause a wider CI can make sure that about 99% (a higher percentage) of the CIs generated from the samples capture the true mean value.
 
 

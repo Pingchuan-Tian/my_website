@@ -46,8 +46,6 @@ library(tidyquant)
 ```
 
 
-# Youth Risk Behavior Surveillance
-
 Every two years, the Centers for Disease Control and Prevention conduct the [Youth Risk Behavior Surveillance System (YRBSS)](https://www.cdc.gov/healthyyouth/data/yrbs/index.htm) survey, where it takes data from high schoolers (9th through 12th grade), to analyze health patterns. You will work with a selected group of variables from a random sample of observations during one of the years the YRBSS was conducted.
 
 ## Load the data
@@ -61,7 +59,7 @@ data(yrbss)
 glimpse(yrbss)
 ```
 
-Before you carry on with your analysis, it's is always a good idea to check with `skimr::skim()` to get a feel for missing values, summary statistics of numerical variables, and a very rough histogram.
+Before we carry on with your analysis, it's is always a good idea to check with `skimr::skim()` to get a feel for missing values, summary statistics of numerical variables, and a very rough histogram.
 
 ```{r,skim_data}
 #skim the data
@@ -70,7 +68,7 @@ skimr::skim(yrbss)
 
 ## Exploratory Data Analysis
 
-You will first start with analyzing the `weight` of participants in kilograms. Using visualization and summary statistics, describe the distribution of weights. How many observations are we missing weights from?
+We will first start with analyzing the `weight` of participants in kilograms. Using visualization and summary statistics, describe the distribution of weights. How many observations are we missing weights from?
 
 ```{r, eda_on_weight}
 #generate the density distribution of weights
@@ -109,7 +107,8 @@ yrbss %>% filter(!is.na(physical_3plus)) %>%
   mutate(prop= count/sum(count))
 
 ```
-Can you provide a 95% confidence interval for the population proportion of high schools that are *NOT* active 3 or more days per week?
+
+Let's provide a 95% confidence interval for the population proportion of high schools that are *NOT* active 3 or more days per week.
 
 ```{r,CI_propno}
 
@@ -131,7 +130,7 @@ propno_formula_ci
 ```
 
   
-Make a boxplot of `physical_3plus` vs. `weight`. Is there a relationship between these two variables? What did you expect and why?
+Make a boxplot of `physical_3plus` vs. `weight`. 
 
 ```{r, boxplot}
 #filter out the data that physical_3plus is NA
@@ -145,7 +144,7 @@ labs(title = "Relationship between physical active and weight",x = "physical act
 
 plot1
 ```
-Is there a relationship between these two variables? What did you expect and why?
+
 > High schoolers tend to have heavier weights when they are physically active for at least 3 days a week. I expect the opposite, which is that high schoolers tend to have lighter weights when they are physically active for at least 3 days a week. And the reason is that high schoolers may lose their weights by doing exercise frequently.
 
 ## Confidence Interval
@@ -199,9 +198,9 @@ obs_diff <- yrbss %>%
 
 
 
-Notice how you can use the functions specify and calculate again like you did for calculating confidence intervals. Here, though, the statistic you are searching for is the difference in means, with the order being yes - no != 0.
+Notice how we can use the functions specify and calculate again like you did for calculating confidence intervals. Here, though, the statistic you are searching for is the difference in means, with the order being yes - no != 0.
 
-After you have initialized the test, you need to simulate the test on the null distribution, which we will save as null.
+After we have initialized the test, we need to simulate the test on the null distribution, which we will save as null.
 
 
 ```{r}

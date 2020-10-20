@@ -77,14 +77,12 @@
                             
 
 
-<div id="general-social-survey-gss" class="section level1">
-<h1>General Social Survey (GSS)</h1>
 <p>The <a href="http://www.gss.norc.org/">General Social Survey (GSS)</a> gathers data on American society in order to monitor and explain trends in attitudes, behaviours, and attributes. Many trends have been tracked for decades, so one can see the evolution of attitudes, etc in American Society.</p>
-<p>In this assignment we analyze data from the <strong>2016 GSS sample data</strong>, using it to estimate values of <em>population parameters</em> of interest about US adults. The GSS sample data file has 2867 observations of 935 variables, but we are only interested in very few of these variables and you are using a smaller file.</p>
+<p>We analyze data from the <strong>2016 GSS sample data</strong>, using it to estimate values of <em>population parameters</em> of interest about US adults. The GSS sample data file has 2867 observations of 935 variables, but we are only interested in very few of these variables and you are using a smaller file.</p>
 <pre class="r"><code>gss &lt;- read_csv(here::here(&quot;data&quot;, &quot;smallgss2016.csv&quot;), 
                 na = c(&quot;&quot;, &quot;Don&#39;t know&quot;,
                        &quot;No answer&quot;, &quot;Not applicable&quot;))</code></pre>
-<p>You will also notice that many responses should not be taken into consideration, like “No Answer”, “Don’t Know”, “Not applicable”, “Refused to Answer”.</p>
+<p>Notice that many responses should not be taken into consideration, like “No Answer”, “Don’t Know”, “Not applicable”, “Refused to Answer”.</p>
 <p>We will be creating 95% confidence intervals for population parameters. The variables we have are the following:</p>
 <ul>
 <li>hours and minutes spent on email weekly. The responses to these questions are recorded in the <code>emailhr</code> and <code>emailmin</code> variables. For example, if the response is 2.50 hours, this would be recorded as emailhr = 2 and emailmin = 30.</li>
@@ -96,7 +94,7 @@
 <h2>Instagram and Snapchat, by sex</h2>
 <p>Can we estimate the <em>population</em> proportion of Snapchat or Instagram users in 2016?</p>
 <ol style="list-style-type: decimal">
-<li>Create a new variable, <code>snap_insta</code> that is <em>Yes</em> if the respondent reported using any of Snapchat (<code>snapchat</code>) or Instagram (<code>instagrm</code>), and <em>No</em> if not. If the recorded value was NA for both of these questions, the value in your new variable should also be NA.</li>
+<li>Create a new variable, <code>snap_insta</code> that is <em>Yes</em> if the respondent reported using any of Snapchat (<code>snapchat</code>) or Instagram (<code>instagrm</code>), and <em>No</em> if not. If the recorded value was NA for both of these questions, the value in our new variable should also be NA.</li>
 </ol>
 <pre class="r"><code>gss&lt;-gss %&gt;%
 mutate (snap_insta=if_else(snapchat==&quot;Yes&quot; | instagrm==&quot;Yes&quot;,&quot;Yes&quot;,if_else(snapchat==&quot;NA&quot; &amp;                                     instagrm==&quot;NA&quot;,&quot;NA&quot;,&quot;No&quot;)))</code></pre>
@@ -141,7 +139,7 @@ gss$degree&lt;-ordered(gss$degree,levels=
 c(&quot;Lt high school&quot;,&quot;High School&quot;,&quot;Junior college&quot;,
 &quot;Bachelor&quot;,&quot;Graduate&quot;))</code></pre>
 <ol style="list-style-type: decimal">
-<li>Create a new variable, <code>bachelor_graduate</code> that is <em>Yes</em> if the respondent has either a <code>Bachelor</code> or <code>Graduate</code> degree. As before, if the recorded value for either was NA, the value in your new variable should also be NA.</li>
+<li>Create a new variable, <code>bachelor_graduate</code> that is <em>Yes</em> if the respondent has either a <code>Bachelor</code> or <code>Graduate</code> degree. As before, if the recorded value for either was NA, the value in our new variable should also be NA.</li>
 </ol>
 <pre class="r"><code>gss &lt;- gss %&gt;%
   mutate(bachelor_graduate = case_when(
@@ -224,7 +222,7 @@ degree_formula_ci_No</code></pre>
  gss&lt;-gss%&gt;%
  mutate(email=as.numeric(email))</code></pre>
 <ol style="list-style-type: decimal">
-<li>Visualise the distribution of this new variable. Find the mean and the median number of minutes respondents spend on email weekly. Is the mean or the median a better measure of the typical amount of time Americans spend on email weekly? Why?</li>
+<li>Visualise the distribution of this new variable. Find the mean and the median number of minutes respondents spend on email weekly.</li>
 </ol>
 <pre class="r"><code>ggplot(gss,mapping=aes(x=email))+
 geom_histogram(binwidth=50)+
@@ -313,7 +311,7 @@ med_email=median(email,na.rm=TRUE),count_email=count(email&gt;1000))</code></pre
 <p>The median is a better measure of the typical amount of time Americans spend on email weekly,because the graph is right-skewed and in the distribution there are a large amount of big values.For instance, there are 221 out of 1649 (=2867-1218) values that are more than 1000. These values will pull up the mean but the median is not affected.</p>
 </blockquote>
 <ol style="list-style-type: decimal">
-<li>Using the <code>infer</code> package, calculate a 95% bootstrap confidence interval for the mean amount of time Americans spend on email weekly. Interpret this interval in context of the data, reporting its endpoints in “humanized” units (e.g. instead of 108 minutes, report 1 hr and 8 minutes). If you get a result that seems a bit odd, discuss why you think this might be the case.</li>
+<li>Using the <code>infer</code> package, calculate a 95% bootstrap confidence interval for the mean amount of time Americans spend on email weekly. Interpret this interval in context of the data, reporting its endpoints in “humanized” units (e.g. instead of 108 minutes, report 1 hr and 8 minutes).</li>
 </ol>
 <pre class="r"><code>library(infer)
 set.seed(1234)
@@ -331,13 +329,9 @@ percentile_ci</code></pre>
 <blockquote>
 <p>We are 95% confident that the interval (6 hours and 25 minutes, 7 hours and 32 minutes) capture the true mean amount of time Americans spend on email weekly. The thing that is odd is that the 95% confident interval doesn’t include the median. And that is because there are a large amount of extreme values.</p>
 </blockquote>
-<ol style="list-style-type: decimal">
-<li>Would you expect a 99% confidence interval to be wider or narrower than the interval you calculated above? Explain your reasoning.</li>
-</ol>
 <blockquote>
-<p>A 99% confidence interval will be wider bacause a wider CI can make sure that about 99% (a higher percentage) of the CIs generated from the samples capture the true mean value.</p>
+<p>And a 99% confidence interval will be wider bacause a wider CI can make sure that about 99% (a higher percentage) of the CIs generated from the samples capture the true mean value.</p>
 </blockquote>
-</div>
 </div>
 
                         </div>

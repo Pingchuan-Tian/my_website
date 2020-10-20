@@ -13,8 +13,6 @@ title: Analysis of movies- IMDB dataset
 
 
 
-<div id="analysis-of-movies--imdb-dataset" class="section level1">
-<h1>Analysis of movies- IMDB dataset</h1>
 <p>We will look at a subset sample of movies, taken from the <a href="https://www.kaggle.com/carolzhangdc/imdb-5000-movie-dataset">Kaggle IMDB 5000 movie dataset</a></p>
 <pre class="r"><code>movies &lt;- read_csv(here::here(&quot;data&quot;, &quot;movies.csv&quot;))
 glimpse(movies)</code></pre>
@@ -26,11 +24,6 @@ glimpse(movies)</code></pre>
 <li><code>votes</code>: the number of people who voted for (or rated) the movie in IMDB</li>
 <li><code>reviews</code>: the number of reviews for that movie</li>
 <li><code>rating</code>: IMDB average rating</li>
-</ul>
-<div id="use-your-data-import-inspection-and-cleaning-skills-to-answer-the-following" class="section level2">
-<h2>Use your data import, inspection, and cleaning skills to answer the following:</h2>
-<ul>
-<li>Are there any missing values (NAs)? Are all entries distinct or are there duplicate entries?</li>
 </ul>
 <pre class="r"><code>movies &lt;- read_csv(here::here(&quot;data&quot;, &quot;movies.csv&quot;))
 skim(movies)</code></pre>
@@ -360,7 +353,7 @@ arrange(movies_4,desc(avg_return_on_budget))</code></pre>
 ## 16 Sci-Fi                   1.58   
 ## 17 Thriller                 0.00823</code></pre>
 <ul>
-<li>Produce a table that shows the top 15 directors who have created the highest gross revenue in the box office. Don’t just show the total gross amount, but also the mean, median, and standard deviation per director.</li>
+<li>Produce a table that shows the top 15 directors who have created the highest gross revenue in the box office. I will show the total gross amount, but also the mean, median, and standard deviation per director.</li>
 </ul>
 <pre class="r"><code>movies &lt;- read_csv(here::here(&quot;data&quot;, &quot;movies.csv&quot;))
 movies_5&lt;-movies_3%&gt;%
@@ -421,11 +414,8 @@ movies_7</code></pre>
 geom_boxplot()+facet_wrap(~genre)+labs(title=&quot;the Histogram Distribution of Ratings for Genres&quot;,
 x=&quot;the ratings for each genre&quot;)</code></pre>
 <p><img src="/projects/project2_files/figure-html/ratings-1.png" width="648" style="display: block; margin: auto;" /></p>
-</div>
-<div id="use-ggplot-to-answer-the-following" class="section level2">
-<h2>Use <code>ggplot</code> to answer the following</h2>
 <ul>
-<li>Examine the relationship between <code>gross</code> and <code>cast_facebook_likes</code>. Produce a scatterplot and write one sentence discussing whether the number of facebook likes that the cast has received is likely to be a good predictor of how much money a movie will make at the box office. What variable are you going to map to the Y- and X- axes?</li>
+<li>Examine the relationship between <code>gross</code> and <code>cast_facebook_likes</code>. Produce a scatterplot and write one sentence discussing whether the number of facebook likes that the cast has received is likely to be a good predictor of how much money a movie will make at the box office.</li>
 </ul>
 <pre class="r"><code>plot1&lt;- ggplot(data = movies_3, 
 mapping = aes(x = cast_facebook_likes, y = gross))+
@@ -450,7 +440,7 @@ plot2</code></pre>
 <p>According to the upward slope of the plot, there is a positive correlation between budget and the money a movie will make at the box office, so budget is likely to be a good predictor of the money a movie will make.</p>
 </blockquote>
 <ul>
-<li>Examine the relationship between <code>gross</code> and <code>rating</code>. Produce a scatterplot, faceted by <code>genre</code> and discuss whether IMDB ratings are likely to be a good predictor of how much money a movie will make at the box office. Is there anything strange in this dataset?</li>
+<li>Examine the relationship between <code>gross</code> and <code>rating</code>. Produce a scatterplot, faceted by <code>genre</code>.</li>
 </ul>
 <pre class="r"><code>movies_3&lt;- movies_3%&gt;%
 filter(genre!=&quot;Family&quot;&amp;genre!=&quot;Musical&quot;&amp;genre!=&quot;Romance&quot;&amp;
@@ -464,5 +454,3 @@ plot3</code></pre>
 <blockquote>
 <p>For some genres such as action, adventure and comedy, the slopes of the plots are upward sloping. For some genres such as drama, fantasy and horror, the slopes are relatively flat. For some genres such as mystery and Sci-Fi,there is a fluctuation. And for documentary, the slope is even downward sloping, suggesting a negative correlation between ratings and gross earnings in the box office. This is the phenomenon that is strange in this dataset. Therefore, IMDB ratings are not likely to be a good predictor of the money a movie will make at the box office.</p>
 </blockquote>
-</div>
-</div>

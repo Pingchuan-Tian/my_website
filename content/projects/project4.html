@@ -13,8 +13,6 @@ title: Youth Risk Behavior Surveillance
 
 
 
-<div id="youth-risk-behavior-surveillance" class="section level1">
-<h1>Youth Risk Behavior Surveillance</h1>
 <p>Every two years, the Centers for Disease Control and Prevention conduct the <a href="https://www.cdc.gov/healthyyouth/data/yrbs/index.htm">Youth Risk Behavior Surveillance System (YRBSS)</a> survey, where it takes data from high schoolers (9th through 12th grade), to analyze health patterns. You will work with a selected group of variables from a random sample of observations during one of the years the YRBSS was conducted.</p>
 <div id="load-the-data" class="section level2">
 <h2>Load the data</h2>
@@ -37,7 +35,7 @@ glimpse(yrbss)</code></pre>
 ## $ hours_tv_per_school_day  &lt;chr&gt; &quot;5+&quot;, &quot;5+&quot;, &quot;5+&quot;, &quot;2&quot;, &quot;3&quot;, &quot;5+&quot;, &quot;5+&quot;, &quot;5...
 ## $ strength_training_7d     &lt;int&gt; 0, 0, 0, 0, 1, 0, 2, 0, 3, 0, 3, 0, 0, 7, ...
 ## $ school_night_hours_sleep &lt;chr&gt; &quot;8&quot;, &quot;6&quot;, &quot;&lt;5&quot;, &quot;6&quot;, &quot;9&quot;, &quot;8&quot;, &quot;9&quot;, &quot;6&quot;, &quot;...</code></pre>
-<p>Before you carry on with your analysis, it’s is always a good idea to check with <code>skimr::skim()</code> to get a feel for missing values, summary statistics of numerical variables, and a very rough histogram.</p>
+<p>Before we carry on with your analysis, it’s is always a good idea to check with <code>skimr::skim()</code> to get a feel for missing values, summary statistics of numerical variables, and a very rough histogram.</p>
 <pre class="r"><code>#skim the data
 skimr::skim(yrbss) </code></pre>
 <table>
@@ -266,7 +264,7 @@ skimr::skim(yrbss) </code></pre>
 </div>
 <div id="exploratory-data-analysis" class="section level2">
 <h2>Exploratory Data Analysis</h2>
-<p>You will first start with analyzing the <code>weight</code> of participants in kilograms. Using visualization and summary statistics, describe the distribution of weights. How many observations are we missing weights from?</p>
+<p>We will first start with analyzing the <code>weight</code> of participants in kilograms. Using visualization and summary statistics, describe the distribution of weights. How many observations are we missing weights from?</p>
 <pre class="r"><code>#generate the density distribution of weights
 ggplot(yrbss,aes(x=weight))+
 geom_density()+
@@ -527,7 +525,7 @@ yrbss %&gt;% filter(!is.na(physical_3plus)) %&gt;%
 ##   &lt;chr&gt;          &lt;int&gt; &lt;dbl&gt;
 ## 1 no              4404 0.331
 ## 2 yes             8906 0.669</code></pre>
-<p>Can you provide a 95% confidence interval for the population proportion of high schools that are <em>NOT</em> active 3 or more days per week?</p>
+<p>Let’s provide a 95% confidence interval for the population proportion of high schools that are <em>NOT</em> active 3 or more days per week.</p>
 <pre class="r"><code>propno_formula_ci&lt;-yrbss %&gt;%
 # filter out the data that physical_3plus is NA
 filter(!is.na(physical_3plus)) %&gt;%
@@ -547,7 +545,7 @@ propno_formula_ci</code></pre>
 ##   count count_yes propno se_propno t_critical lower_bound upper_bound
 ##   &lt;int&gt;     &lt;int&gt;  &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
 ## 1 13310      8906  0.331   0.00408       1.64       0.324       0.338</code></pre>
-<p>Make a boxplot of <code>physical_3plus</code> vs. <code>weight</code>. Is there a relationship between these two variables? What did you expect and why?</p>
+<p>Make a boxplot of <code>physical_3plus</code> vs. <code>weight</code>.</p>
 <pre class="r"><code>#filter out the data that physical_3plus is NA
 yrbss1&lt;-yrbss%&gt;%
 filter(!is.na(physical_3plus))
@@ -558,9 +556,10 @@ aes(x = physical_3plus, y = weight))+geom_boxplot()+
 labs(title = &quot;Relationship between physical active and weight&quot;,x = &quot;physical active&quot;,y = &quot;weight&quot;) +NULL
 
 plot1</code></pre>
-<p><img src="/projects/project4_files/figure-html/boxplot-1.png" width="648" style="display: block; margin: auto;" />
-Is there a relationship between these two variables? What did you expect and why?
-&gt; High schoolers tend to have heavier weights when they are physically active for at least 3 days a week. I expect the opposite, which is that high schoolers tend to have lighter weights when they are physically active for at least 3 days a week. And the reason is that high schoolers may lose their weights by doing exercise frequently.</p>
+<p><img src="/projects/project4_files/figure-html/boxplot-1.png" width="648" style="display: block; margin: auto;" /></p>
+<blockquote>
+<p>High schoolers tend to have heavier weights when they are physically active for at least 3 days a week. I expect the opposite, which is that high schoolers tend to have lighter weights when they are physically active for at least 3 days a week. And the reason is that high schoolers may lose their weights by doing exercise frequently.</p>
+</blockquote>
 </div>
 <div id="confidence-interval" class="section level2">
 <h2>Confidence Interval</h2>
@@ -611,8 +610,8 @@ Is there a relationship between these two variables? What did you expect and why
 <pre class="r"><code>obs_diff &lt;- yrbss %&gt;%
   specify(weight ~ physical_3plus) %&gt;%
   calculate(stat = &quot;diff in means&quot;, order = c(&quot;yes&quot;, &quot;no&quot;))</code></pre>
-<p>Notice how you can use the functions specify and calculate again like you did for calculating confidence intervals. Here, though, the statistic you are searching for is the difference in means, with the order being yes - no != 0.</p>
-<p>After you have initialized the test, you need to simulate the test on the null distribution, which we will save as null.</p>
+<p>Notice how we can use the functions specify and calculate again like you did for calculating confidence intervals. Here, though, the statistic you are searching for is the difference in means, with the order being yes - no != 0.</p>
+<p>After we have initialized the test, we need to simulate the test on the null distribution, which we will save as null.</p>
 <pre class="r"><code>null_dist &lt;- yrbss %&gt;%
   specify(weight ~ physical_3plus) %&gt;%
   hypothesize(null = &quot;independence&quot;) %&gt;%
@@ -636,5 +635,4 @@ Is there a relationship between these two variables? What did you expect and why
 ##     &lt;dbl&gt;
 ## 1       0</code></pre>
 <p>This the standard workflow for performing hypothesis tests.</p>
-</div>
 </div>

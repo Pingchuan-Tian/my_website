@@ -60,9 +60,9 @@ summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 2
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/projects/project2/</guid>
-      <description>Analysis of movies- IMDB datasetWe will look at a subset sample of movies, taken from the Kaggle IMDB 5000 movie dataset
+      <description>We will look at a subset sample of movies, taken from the Kaggle IMDB 5000 movie dataset
 movies &amp;lt;- read_csv(here::here(&amp;quot;data&amp;quot;, &amp;quot;movies.csv&amp;quot;))glimpse(movies)Besides the obvious variables of title, genre, director, year, and duration, the rest of the variables are as follows:
-gross : The gross earnings in the US box office, not adjusted for inflationbudget: The movie’s budgetcast_facebook_likes: the number of facebook likes cast memebrs receivedvotes: the number of people who voted for (or rated) the movie in IMDBreviews: the number of reviews for that movierating: IMDB average ratingUse your data import, inspection, and cleaning skills to answer the following:Are there any missing values (NAs)?</description>
+gross : The gross earnings in the US box office, not adjusted for inflationbudget: The movie’s budgetcast_facebook_likes: the number of facebook likes cast memebrs receivedvotes: the number of people who voted for (or rated) the movie in IMDBreviews: the number of reviews for that movierating: IMDB average ratingmovies &amp;lt;- read_csv(here::here(&amp;quot;data&amp;quot;, &amp;quot;movies.</description>
     </item>
     
     <item>
@@ -71,7 +71,7 @@ movies &amp;lt;- read_csv(here::here(&amp;quot;data&amp;quot;, &amp;quot;movies.
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/projects/project1/</guid>
-      <description>gapminder country comparisonYou have seen the gapminder dataset that has data on life expectancy, population, and GDP per capita for 142 countries from 1952 to 2007. To get a glipmse of the dataframe, namely to see the variable names, variable types, etc., we use the glimpse function. We also want to have a look at the first 20 rows of data.
+      <description>We have seen the gapminder dataset that has data on life expectancy, population, and GDP per capita for 142 countries from 1952 to 2007. To get a glipmse of the dataframe, namely to see the variable names, variable types, etc., we use the glimpse function. We also want to have a look at the first 20 rows of data.
 glimpse(gapminder)## Rows: 1,704## Columns: 6## $ country &amp;lt;fct&amp;gt; Afghanistan, Afghanistan, Afghanistan, Afghanistan, Afgha.</description>
     </item>
     
@@ -81,8 +81,8 @@ glimpse(gapminder)## Rows: 1,704## Columns: 6## $ country &amp;lt;fct&amp;gt;
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/projects/project3/</guid>
-      <description>General Social Survey (GSS)The General Social Survey (GSS) gathers data on American society in order to monitor and explain trends in attitudes, behaviours, and attributes. Many trends have been tracked for decades, so one can see the evolution of attitudes, etc in American Society.
-In this assignment we analyze data from the 2016 GSS sample data, using it to estimate values of population parameters of interest about US adults.</description>
+      <description>The General Social Survey (GSS) gathers data on American society in order to monitor and explain trends in attitudes, behaviours, and attributes. Many trends have been tracked for decades, so one can see the evolution of attitudes, etc in American Society.
+We analyze data from the 2016 GSS sample data, using it to estimate values of population parameters of interest about US adults. The GSS sample data file has 2867 observations of 935 variables, but we are only interested in very few of these variables and you are using a smaller file.</description>
     </item>
     
     <item>
@@ -103,7 +103,7 @@ My hobbies:
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/projects/project4/</guid>
-      <description>Youth Risk Behavior SurveillanceEvery two years, the Centers for Disease Control and Prevention conduct the Youth Risk Behavior Surveillance System (YRBSS) survey, where it takes data from high schoolers (9th through 12th grade), to analyze health patterns. You will work with a selected group of variables from a random sample of observations during one of the years the YRBSS was conducted.
+      <description>Every two years, the Centers for Disease Control and Prevention conduct the Youth Risk Behavior Surveillance System (YRBSS) survey, where it takes data from high schoolers (9th through 12th grade), to analyze health patterns. You will work with a selected group of variables from a random sample of observations during one of the years the YRBSS was conducted.
 Load the dataThis data is part of the openintro textbook and we can load and inspect it.</description>
     </item>
     

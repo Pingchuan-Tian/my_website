@@ -45,7 +45,6 @@ library(purrr)
 library(lubridate) #to handle dates
 ```
 
-# Analysis of movies- IMDB dataset
 
 We will look at a subset sample of movies, taken from the [Kaggle IMDB 5000 movie dataset](https://www.kaggle.com/carolzhangdc/imdb-5000-movie-dataset)
 
@@ -66,9 +65,7 @@ Besides the obvious variables of `title`, `genre`, `director`, `year`, and `dura
 - `reviews`: the number of reviews for that movie
 - `rating`: IMDB average rating 
 
-## Use your data import, inspection, and cleaning skills to answer the following:
 
-- Are there any missing values (NAs)? Are all entries distinct or are there duplicate entries?
 ```{r, skim_movies}
 movies <- read_csv(here::here("data", "movies.csv"))
 skim(movies)
@@ -102,7 +99,7 @@ arrange(movies_4,desc(avg_return_on_budget))
 
 
 
-- Produce a table that shows the top 15 directors who have created the highest gross revenue in the box office. Don't just show the total gross amount, but also the mean, median, and standard deviation per director.
+- Produce a table that shows the top 15 directors who have created the highest gross revenue in the box office. I will show the total gross amount, but also the mean, median, and standard deviation per director.
 ```{r,directors}
 movies <- read_csv(here::here("data", "movies.csv"))
 movies_5<-movies_3%>%
@@ -127,9 +124,8 @@ geom_boxplot()+facet_wrap(~genre)+labs(title="the Histogram Distribution of Rati
 x="the ratings for each genre")
 ```
 
-## Use `ggplot` to answer the following
 
-  - Examine the relationship between `gross` and `cast_facebook_likes`. Produce a scatterplot and write one sentence discussing whether the number of facebook likes that the cast has received is likely to be a good predictor of how much money a movie will make at the box office. What variable are you going to map to the Y- and X- axes?
+  - Examine the relationship between `gross` and `cast_facebook_likes`. Produce a scatterplot and write one sentence discussing whether the number of facebook likes that the cast has received is likely to be a good predictor of how much money a movie will make at the box office. 
   
   
 ```{r, gross_on_fblikes}
@@ -157,7 +153,7 @@ plot2
 
 > According to the upward slope of the plot, there is a positive correlation between budget and the money a movie will make at the box office, so budget is likely to be a good predictor of the money a movie will make.
 
-  - Examine the relationship between `gross` and `rating`. Produce a scatterplot, faceted by `genre` and discuss whether IMDB ratings are likely to be a good predictor of how much money a movie will make at the box office. Is there anything strange in this dataset?
+  - Examine the relationship between `gross` and `rating`. Produce a scatterplot, faceted by `genre`.
 
 ```{r, gross_on_rating}
 movies_3<- movies_3%>%
