@@ -73,7 +73,7 @@ disqusShortname = ""
     # Display your showcases here.
     
     [[params.tiles.showcase]]
-      title = "`gapminder` country comparison"
+      title = "'gapminder' country comparison"
       subtitle = "Take a look at the demographic and economic info of different countries!"
       image = "picture01.jpg"
       url = "projects/project1"
