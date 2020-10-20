@@ -184,16 +184,19 @@ Can we estimate the *population* parameter on time spent on email weekly?
  mutate(email=case_when(
  emailhr == "NA" | emailmin == "NA" ~ "NA",
  TRUE ~ as.character(emailhr*60+emailmin)))
+ gss<-drop_na(gss,email)
+ gss<-gss%>%
+ mutate(email=as.numeric(email))
+ 
 ```
 
 1. Visualise the distribution of this new variable. Find the mean and the median number of minutes respondents spend on email weekly. Is the mean or the median a better measure of the typical amount of time Americans spend on email weekly? Why?
 ```{r,distribution_email}
-as.numeric(gss$email)
-gss<-drop_na(gss,email)
-ggplot(gss,aes(x=email))+
-geom_bar(width=1)+
-labs(title="the Histogram Distribution of Email Time",
-x="email time")+theme(axis.text.x=element_blank())
+
+ggplot(gss,mapping=aes(x=email))+
+geom_histogram(binwidth=50)+
+labs(title="the Histogram Distribution of Email Time",x="email time")
+
 
 gss<-gss%>%
 mutate(email=as.numeric(email))
@@ -203,7 +206,7 @@ skim(gss$email)
 
 ```
 
-> The median is a better measure of the typical amount of time Americans spend on email weekly,because in the distribution there are a large amount of big values.For instance, there are 221 out of 1649 (=2867-1218) values that are more than 1000. These values will pull up the mean but the median is not affected.
+> The median is a better measure of the typical amount of time Americans spend on email weekly,because the graph is right-skewed and in the distribution there are a large amount of big values.For instance, there are 221 out of 1649 (=2867-1218) values that are more than 1000. These values will pull up the mean but the median is not affected.
 
 1. Using the `infer` package, calculate a 95% bootstrap confidence interval for the mean amount of time Americans spend on email weekly. Interpret this interval in context of the data, reporting its endpoints in “humanized” units (e.g. instead of 108 minutes, report 1 hr and 8 minutes). If you get a result that seems a bit odd, discuss why you think this might be the case.
 ```{r,bootstrap_CI_email}

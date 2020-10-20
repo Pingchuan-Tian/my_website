@@ -160,6 +160,9 @@ plot2
   - Examine the relationship between `gross` and `rating`. Produce a scatterplot, faceted by `genre` and discuss whether IMDB ratings are likely to be a good predictor of how much money a movie will make at the box office. Is there anything strange in this dataset?
 
 ```{r, gross_on_rating}
+movies_3<- movies_3%>%
+filter(genre!="Family"&genre!="Musical"&genre!="Romance"&
+       genre!="Sci-Fi"&genre!="Thriller"&genre!="Western")
 plot3<- ggplot(data = movies_3, mapping = aes(x = rating, y = gross))+
 geom_point() +geom_smooth(se = FALSE)+facet_wrap(~genre)+
 labs(title = "Relationship between Ratings and Gross Earnings ",

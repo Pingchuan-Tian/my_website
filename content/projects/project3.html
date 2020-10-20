@@ -155,221 +155,16 @@ degree_formula_ci_No</code></pre>
  gss &lt;-gss %&gt;%
  mutate(email=case_when(
  emailhr == &quot;NA&quot; | emailmin == &quot;NA&quot; ~ &quot;NA&quot;,
- TRUE ~ as.character(emailhr*60+emailmin)))</code></pre>
+ TRUE ~ as.character(emailhr*60+emailmin)))
+ gss&lt;-drop_na(gss,email)
+ gss&lt;-gss%&gt;%
+ mutate(email=as.numeric(email))</code></pre>
 <ol style="list-style-type: decimal">
 <li>Visualise the distribution of this new variable. Find the mean and the median number of minutes respondents spend on email weekly. Is the mean or the median a better measure of the typical amount of time Americans spend on email weekly? Why?</li>
 </ol>
-<pre class="r"><code>as.numeric(gss$email)</code></pre>
-<pre><code>##    [1]  720   30   NA   10   NA  120 2400   NA    0   NA  120   NA  600   NA
-##   [15]   30   NA   NA   60   60  120 1500   NA   60   NA   NA   NA   NA    0
-##   [29]   10   NA   60   NA  120   NA    0   30  300  120   NA   NA   NA   60
-##   [43]  420   NA   90   NA 3600  240   NA 1200 2700  120   60   NA    0  420
-##   [57]  120 1500   NA   45   NA   20   NA   60   NA   NA 3600   20   NA   NA
-##   [71]    0 2640   NA   60   60   NA  900  600   NA   NA 2400   NA  120   NA
-##   [85]   NA  120 3600   NA   NA   NA  300   NA  300   NA   NA  900   60  600
-##   [99]   NA   NA   NA    0   NA   NA   NA   NA   NA   NA  300   NA  180   NA
-##  [113]   NA  120  240   NA   NA   45   NA  420   60   NA   NA 3000   60   60
-##  [127]  600   NA 1200 2400   NA 1200   NA  210   NA   60   NA   NA  480   NA
-##  [141]   60   NA   60   NA   10 1800   NA   30 3000  120   NA  300   NA 1200
-##  [155]   NA   60   NA  180 2400    0  300  600   NA   NA   NA   NA   NA  420
-##  [169]   NA   NA   60   NA   15   NA   60 1800 1200   NA   NA   60   NA   60
-##  [183]   NA   60   NA   60   NA  480    0   NA   NA    0   NA   60  240 1500
-##  [197]   NA  240   60  720 2520  120  300  600   NA  300  600   NA   30  240
-##  [211]  720  120   20   NA  120   NA   60    0  480   NA   NA   NA   NA   NA
-##  [225]  480  300   NA  300   NA  300  120   NA  480   NA  120 1200   NA   NA
-##  [239]   60    2   10   10    0   60  420   60   NA  600 1200   NA  480   60
-##  [253]   NA  120   NA  120  120   60   NA 5400  600   NA  120 4500  300   60
-##  [267]   60    0   NA   10   NA  300   60 1500  360   NA  100   NA  600  480
-##  [281]  120   60   NA  600    0   NA  180   NA  120  600 1200 1320 1200  180
-##  [295]   NA    0   60   NA 1200  180  180   NA   60    0 3000  600   20  120
-##  [309]  180   15 3000  180   NA  300   NA  720  900  120    0  120   NA  720
-##  [323]  900    0   NA    0   NA    0  900  900   NA  600  180   60   NA  480
-##  [337]   NA    5   60   10   NA   30   NA  180   NA  120  120 2400  180   59
-##  [351]   NA    1  720  600   NA   NA   NA  720   NA 1500   NA 1440   30   NA
-##  [365] 1920  600   NA  120  300   NA   NA   60   NA   NA   NA  600   NA 1260
-##  [379]   NA  360  180  600  360   NA 1800  600   NA 1200   NA  480   NA   NA
-##  [393]   NA  600   NA   30   NA  600 1800 1320   NA  180   NA   NA  720   NA
-##  [407]  420  420 1800  120  150   NA 2400 1800   NA   NA  900   NA    0   NA
-##  [421]  420   NA  750   NA  300   NA  600 1200  120   NA   NA 3000   NA   NA
-##  [435]   NA  600    0 1680    0   20   NA 1200   NA   NA    5  180    0   20
-##  [449] 1500  420   70   NA  420  120  600   NA 3360   NA 2100  600   NA 1200
-##  [463]   NA  120   NA  120  600   NA   60  600   NA  240   60   60   NA    0
-##  [477]    0   60  180   NA  120   NA   NA  720 1200   NA   NA  240   NA   NA
-##  [491]   NA   NA    0   NA  240    0 2700 2400   NA  420  120   NA   NA   NA
-##  [505]   30  840   NA  180  720   NA    2   70   NA    5   NA  120 3600   NA
-##  [519]   20   30 1200   60  420 1200  150  420   60   NA  600 1800   NA   NA
-##  [533]  300   NA    0   40   NA   NA   NA   10 1200   NA  240  600   NA   60
-##  [547]   NA  120   NA   NA  480   NA   NA   60   NA  120  360  600   NA   NA
-##  [561]   NA   NA   NA   NA   NA    0   NA  120   60   NA    2  240  180  600
-##  [575]   NA  120   NA   NA    0   60   NA   NA   60   NA   60   NA   NA   NA
-##  [589]  180  300   NA   NA 3600  600   NA   NA  600   NA  480  900   NA    0
-##  [603]    0   NA   NA  600  600   NA  120 1920   20   60   NA   NA   NA  300
-##  [617]  300  600   NA  180   30   NA   60   NA    0   NA   60  600   60   NA
-##  [631]    1   NA  720  180  180  300   NA  180   NA   60   NA   30 1800  600
-##  [645]   NA   NA   NA  240   NA  540    0  600   10  480   NA   NA   NA   NA
-##  [659]   60   60   NA   NA 1200   NA  420   NA    0   60   NA    5   NA   20
-##  [673]   NA    2 1800   NA  900 1320   NA   60   NA   NA   NA    0   NA   NA
-##  [687]  300   NA   NA   NA  480   NA    0    0   NA   NA   60   60   NA   NA
-##  [701]  420  300  240   30 1260  600   NA   NA  300    0   NA   NA  120   NA
-##  [715]   60  120   NA    0 1200   NA  480   NA   NA   NA   NA  480   NA   NA
-##  [729]   60  120 1215   NA   NA  300   NA   60  600   NA    0   NA  120  360
-##  [743]   NA   90  360   NA  120   NA   60 2700   NA  300   60   NA   NA   NA
-##  [757]   NA 1320   NA   60  120  120   NA   NA    0   NA   60  240   NA 1200
-##  [771]   NA   NA 1200  120   NA    0   NA   60   NA   NA   NA  180    0 1200
-##  [785]   90 4200   NA 1200   NA  180   NA    2    0   NA   60   25   NA   60
-##  [799]   NA   60   NA  240  180   30   60    0 3000   70   60   NA  300 1200
-##  [813]   NA 1200   NA  120    0  360   NA  600   NA  840   NA   NA  480   NA
-##  [827]   60   20   NA   90   NA   NA    0   NA 1800  120   NA   NA   NA  300
-##  [841]   NA   NA   NA   60   20  360 2400   NA 3000  180   NA  600    0   NA
-##  [855]   40   NA   30   NA  900   NA  600   NA   NA   60   15   NA    0   NA
-##  [869]   NA   NA  300    0   NA   NA 1200   NA   NA   30  120    0 1200   45
-##  [883]  900   NA 1500   NA  480   NA 1500  300  120   NA   60   NA   30   NA
-##  [897]   NA  240   10  600  600   NA  720   NA    0  120   60  600   NA   NA
-##  [911]   NA   60  120    0  180   NA   60   NA   NA  300   NA   60 1200   70
-##  [925]  300 1200   NA   NA    0 1800   NA   60   NA    0   NA    0   NA 1800
-##  [939]  600  420 2400   60   NA   60   NA   NA   NA   NA 2400   NA   NA 2100
-##  [953]   NA  120   NA   NA   NA   NA   NA   NA   NA  120    0   60   NA    0
-##  [967]   30   30   NA   30   NA   NA   NA   60   60   NA  180   NA   NA  720
-##  [981]   30   NA  300   NA 1800   NA   NA   NA   30   NA   NA  180  180 1800
-##  [995]   NA  900  600  240   NA  240   NA    0   60   30   60  360   NA  900
-## [1009]   60  300   60   NA  120  900   NA  240 2820   NA 2400   NA  480   30
-## [1023]   90   NA  720  480 1200   60  120   NA  600  900 1200  900   NA  600
-## [1037]   NA  300   60   60  120  120  120   NA  900   NA   90  510   60   NA
-## [1051]   NA 1020  120   NA  120   NA 1800    0   NA  420  600   60   NA   NA
-## [1065]   NA    0   NA   NA  120   NA  480    0  120   NA   NA    0   NA   NA
-## [1079]   NA   60  120   30 2400   NA    0   NA   60   20   NA   30   NA  120
-## [1093]    0   60   NA  900   NA   60  570   NA  180   10   30   NA   NA  300
-## [1107]  120   60   NA   90    0   NA   NA   NA   NA  150  420   NA  120  240
-## [1121]    0 1200   NA  120   60   NA   60   10   NA 2400   NA  180   15   NA
-## [1135]   60   60   NA  105   NA   15   20   NA   60  120   NA   60   NA   20
-## [1149]  240 1500   NA  300   NA   60   NA 2400 2400   NA  120   NA  420  840
-## [1163]   NA  300  600   NA   60   NA  120  900   NA   NA   60   NA    5    0
-## [1177]  720  360   NA   60   NA  900    0   NA   NA   NA   NA   NA   10   NA
-## [1191]   60   NA  480  840   NA   NA  600   NA   90   NA   NA   NA   15   NA
-## [1205]  120    1   NA    5   30    0 1200    0   NA   NA  600   10   NA    0
-## [1219] 1500  360   NA  120    0 1200  120   NA    1   NA   60   NA   60   NA
-## [1233]    0   NA   90   NA   NA   60   60 2100   NA  120   NA 1200   NA   NA
-## [1247]   90   NA   NA  600 1200   60  240   NA   45 1500  180 2100    0   NA
-## [1261]    0   NA   NA   NA 4200   NA   60   NA   60   NA   NA  300   NA 2880
-## [1275]   NA   NA    0   NA   60 1680   NA  360   NA   NA 1200   60   NA   NA
-## [1289]    0    0   30 1200   NA   60   NA 1500  420 2400   60   60   NA  120
-## [1303]   NA   NA   NA   NA  420   NA   NA   60   NA  180   NA   NA   NA   NA
-## [1317]   NA   60   NA   NA   NA  180   NA 1800   NA   90   NA 1200  900   NA
-## [1331]  180   NA 1200   NA   NA    0   NA 1200   NA  600   30   NA   30 1200
-## [1345]   60  360   NA  240   NA   NA   15   NA  240   60   NA    0    0   NA
-## [1359]   NA   30   NA  600  120  120   NA   30   NA   NA   60   20   60   15
-## [1373]   60   NA  720  120   NA  120   NA  420   10   NA  300   60   NA   20
-## [1387]   15   NA   NA    0   NA  240   NA 1200   NA 1800  120   NA   30    0
-## [1401]   60   NA 2400   NA  960   NA   NA  180   NA    0   NA  600   NA   NA
-## [1415]  900   60   NA   60  120   50 2400   NA    0   NA 1200  300   NA  240
-## [1429]  900  600  180  120   NA   NA   NA   25   NA   NA  180  300   NA   NA
-## [1443]  300   NA  120  600   NA    0   NA   NA   NA  480   NA   NA 1200  120
-## [1457]  900   NA  120  300   20    2   NA    0   NA   NA   NA   NA   60   60
-## [1471]   60  120  180  180   NA   NA  600   NA  120  480  360  300    0   NA
-## [1485]   48   NA  420   NA   NA   NA 3000 3000 1500   NA 1800  180   NA    0
-## [1499]  120   NA 1800   NA 1500  480   60   NA   NA   NA   15   NA   NA   10
-## [1513]   NA   NA  180    0   NA   NA   10   NA   60   NA  360  120   NA   NA
-## [1527]  360    0   NA   NA 1200   NA  120    0   60  300   NA  120  180   NA
-## [1541]  300   NA  240   60   60  120   NA  120   NA    0  420 2400   30   NA
-## [1555]   10  120   NA   NA   NA  900   NA   60   NA  720 1800   NA  420   NA
-## [1569]  300   NA  600 1200   NA   NA  900   NA   NA   NA   NA   NA  300   20
-## [1583]   NA 3600  120    0   NA   NA   60   10   NA  420   30   NA   NA   NA
-## [1597]   NA  120   NA   60   NA  180   NA  120   NA   NA  480   NA   NA  240
-## [1611] 3000   NA   40 1500   NA    0   NA 2100   10   NA 2700   NA   30   60
-## [1625]   NA   NA   NA  120   60   60    0   NA    0   NA  420   NA  300    2
-## [1639]   NA    0   NA   60    0   60  360  900   60   NA   NA   30   NA   NA
-## [1653]   NA   60   NA   NA    0   NA  420    0    0  120  600   NA  120   NA
-## [1667]  210   NA   NA  300   NA  180  840   NA    0   NA   30   NA    0   NA
-## [1681]    0   60  120   NA  120   NA   NA   90  120   NA 2100  480   NA   NA
-## [1695]    0   30   NA   60   NA   NA    0   60   NA   60   NA 2400   60    0
-## [1709]   60   60  600   NA  240    0   NA  120  120   NA   NA   NA   NA   60
-## [1723]    0   NA  900   NA  120   60  120   NA    0   NA   NA   NA  300  120
-## [1737]  540 1500   NA  120   NA   90  120   NA 1800 1800  120   60   NA 1200
-## [1751]  120   NA 2400   NA   NA   NA    0  360   NA   NA  240   NA  300   NA
-## [1765]   NA   NA   NA   NA   NA   NA   NA   60   NA  120  360   60   NA    0
-## [1779] 1200   NA   NA  120   NA   60    0  180   30   NA    0   60   NA  900
-## [1793]  600  120   NA  180  240  360   NA    0  120  600   NA   NA  300   20
-## [1807]   NA 1200   NA  180   NA   NA   NA 1500   NA  120   60  240   NA  210
-## [1821]   NA   90   60   NA   NA   60 1800   NA  600   NA   NA  240   NA   30
-## [1835]  600   60   NA   NA   60  240    0   NA  600   NA    0  120   NA 2400
-## [1849]   60   NA   NA  300  600   60  420   NA   NA   60   NA   NA   NA  120
-## [1863]   NA   60   30   NA   NA    0   NA   40   NA   NA    0   NA   45  480
-## [1877]   NA   NA    0 1200   NA   NA  150   NA  840   NA   NA    0  480  120
-## [1891]   NA   15   30   60   30   NA  180  300   NA 1320  180   NA   NA 1200
-## [1905]    0  300  120   30   NA  420   NA   NA   60   NA  120   NA  180   NA
-## [1919]  720   NA   60   NA   NA   NA   NA    0   NA   60 1200   60   NA   30
-## [1933]   NA  360   60  420  720   NA   60   NA   NA  600 1800   NA   NA   NA
-## [1947]  600   NA  480   NA   NA  600  120  120   NA  180   NA    0   NA  600
-## [1961]   60   NA   60   60   60   NA  420   NA 2100   NA  300  480   NA    0
-## [1975]   NA   NA   60   60   NA   NA   NA   60  300  120   NA   10  120  300
-## [1989]   60    0   NA   60   NA  120   NA    0   NA 1500   NA   60   30   NA
-## [2003]   30   30   NA    0   NA 2100  600   60  120  120   60    0  300   20
-## [2017]   NA   60    0  120   NA   NA   60    0   NA   60   NA   NA   NA    5
-## [2031]   NA   60   NA   NA  120   NA  120    0  240  840  240   NA  180  480
-## [2045]   NA   NA  960   NA   NA   60   NA   NA    0   NA  300 2160  240   NA
-## [2059] 1200   NA   30   60   NA   NA   60   NA   NA    0   45  180  240   NA
-## [2073]  300   NA   NA    0    0   NA 1200   NA    0   NA   60  300   NA  120
-## [2087]   NA  900   NA   60  600   NA   30   NA   60  240   NA  180   NA  120
-## [2101]   NA  120  360    0   60   NA  300   NA   NA   30   NA   30  180   NA
-## [2115]  240   NA 1500  300   NA  120 1200 3000   NA   NA 1200   NA  240 1500
-## [2129]  420  600   NA   NA   NA  180  120   NA  300 1200   NA   60   NA  480
-## [2143]  120  300   NA   60 4320    0   NA    0   NA    0  180  120    0    0
-## [2157]   30   NA  180   NA    0   60   60   NA   NA    0   NA 1200   NA    0
-## [2171]   NA   NA   NA   NA   NA 1800  480   30   NA   NA  540   NA   60  360
-## [2185]   NA  120 1200  600   NA  300   NA  600   NA   20  420   NA   60   NA
-## [2199]  900   10 1260  600  840   NA  180  240  240   NA   NA   30   NA   NA
-## [2213]    0   NA   NA   60   NA    1  480   NA   NA  420   NA   90  600   NA
-## [2227]  480   NA   30   NA  720  120   NA  300   NA   NA   30   NA  480   NA
-## [2241]   30  420   NA  600  300  120   NA   NA   NA   NA  180   60   NA   NA
-## [2255]   NA   NA    0    0   NA   30  420    0   60   NA   60   NA   30  600
-## [2269]   NA   NA    0  120   NA  600   NA    0 1200    0  300   NA  240   60
-## [2283] 1800   NA    0   NA    0   NA 1260   NA    0   NA   NA  180   NA   NA
-## [2297]  240  240  120   30   NA   NA   60   NA   NA 2400  120  180   NA   NA
-## [2311]    0 1200   50   NA  240   10   30   NA  420   30  120  240  360   60
-## [2325]   NA 1800   60   NA   NA   NA   NA   NA  180   NA   NA   60  600   NA
-## [2339] 1800   60  120   NA    0   60   NA  240   NA  120  300  240   NA 3000
-## [2353]   NA 1500 3600   NA   NA  120   60   NA   NA  900 6000   NA 1200   NA
-## [2367]    0 1200   NA   30   NA    0  600    0   NA   NA   20   60    0 1200
-## [2381]   NA   NA  300   NA   NA   NA   NA   60   NA    0   NA   30  600    0
-## [2395]   NA   30   10   60 1260   NA  180   NA    0   NA   60 1500   NA  300
-## [2409]  120   60  180   NA   60   30  300   NA   60   NA   60    0   60   NA
-## [2423]   NA 2880   30   NA   NA 1800  300   NA 1200   NA    0  120    0    5
-## [2437]  300   60   NA   30   NA  180   60   NA   NA   NA  180  120   60   30
-## [2451]   NA    0   60   15  600    0   NA 1200   NA   30   30   NA  240   NA
-## [2465]  240   NA  360   NA   60   NA   NA  600   NA   90   NA  120 1200 1500
-## [2479]   60   NA  240  120   NA   NA   NA   NA  120   NA   30   NA   NA    0
-## [2493]   NA   NA   NA  600   NA    5   60   30  180   NA    5    0   10   NA
-## [2507]   15   NA   NA    0   NA   15  120   NA    5    0   NA   20   NA 2520
-## [2521]   NA    0  600   NA    2 3000 1200   NA  300   60    0  420   20   NA
-## [2535] 1800  600   NA 1500   NA   NA   30   NA   60    0   15  720   60  120
-## [2549]    0   NA  360    0   NA   NA   NA   10  120   NA   15   NA  300  900
-## [2563]  900   NA   NA   NA   60    0   50   NA   NA  120  240    0   NA   60
-## [2577]   60  240   NA  960   NA   60   60    0   NA  120   30  120   NA 1080
-## [2591]    0   NA  120   NA   30   NA   NA   45  120 1200   NA    5    0   NA
-## [2605]   60   NA  120   NA   60   30   60   NA   NA  180   NA   NA   NA   NA
-## [2619]   60    0   NA   60   NA  420   60  120  180  900   NA  480   NA   60
-## [2633]  600   NA    0   NA   60   60   NA   60  720   60  240   NA   10   NA
-## [2647]   60  420  300   NA 1800   90   NA   60    0   NA  600   NA   NA  300
-## [2661]    0   NA   60   NA   NA   NA  120    0  300   NA  120   NA    0   NA
-## [2675]   NA   NA   NA   10  840   NA    0    0   NA    0  300  480  300  120
-## [2689]   NA    0   NA    0    0   NA  300  600   NA  720  120   NA 1800   NA
-## [2703]   NA   NA    0  300 2400   60   NA   60   NA   NA  180   60   NA 1200
-## [2717]  420   NA    0  300   NA   NA   10  420   NA   NA   NA  180   NA   NA
-## [2731]  720    0    0   NA  900  600   NA   NA   60   60  120   NA   NA   30
-## [2745]   NA   NA  300    0   NA   NA   60   NA   NA  240    0    0    0    0
-## [2759]   NA   NA   NA   NA  480  240    0    0   20   NA   NA  120   60    0
-## [2773]   NA   NA   NA 1800  300   NA   NA   NA   30   90   NA  720  480   NA
-## [2787]    0   NA   NA   NA  240   NA   40   NA   10   60   NA   NA   30   NA
-## [2801]   60   60   NA   NA   NA  240   NA   NA   NA   NA    0    0   60  150
-## [2815]   NA 2400    0  240   NA   NA   NA   NA   60   NA   NA   60   30  120
-## [2829]   NA  240   60    0   NA   NA  420   NA  600   NA 1200  480  600   NA
-## [2843]   NA   NA  120   NA   NA  300   NA   NA  360   NA 1200  600   NA  300
-## [2857]   60  720  240   NA   60   NA 1200  120    0   60   NA</code></pre>
-<pre class="r"><code>gss&lt;-drop_na(gss,email)
-ggplot(gss,aes(x=email))+
-geom_bar(width=1)+
-labs(title=&quot;the Histogram Distribution of Email Time&quot;,
-x=&quot;email time&quot;)+theme(axis.text.x=element_blank())</code></pre>
+<pre class="r"><code>ggplot(gss,mapping=aes(x=email))+
+geom_histogram(binwidth=50)+
+labs(title=&quot;the Histogram Distribution of Email Time&quot;,x=&quot;email time&quot;)</code></pre>
 <p><img src="/projects/project3_files/figure-html/distribution_email-1.png" width="648" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>gss&lt;-gss%&gt;%
 mutate(email=as.numeric(email))
@@ -451,7 +246,7 @@ med_email=median(email,na.rm=TRUE),count_email=count(email&gt;1000))</code></pre
 </tbody>
 </table>
 <blockquote>
-<p>The median is a better measure of the typical amount of time Americans spend on email weekly,because in the distribution there are a large amount of big values.For instance, there are 221 out of 1649 (=2867-1218) values that are more than 1000. These values will pull up the mean but the median is not affected.</p>
+<p>The median is a better measure of the typical amount of time Americans spend on email weekly,because the graph is right-skewed and in the distribution there are a large amount of big values.For instance, there are 221 out of 1649 (=2867-1218) values that are more than 1000. These values will pull up the mean but the median is not affected.</p>
 </blockquote>
 <ol style="list-style-type: decimal">
 <li>Using the <code>infer</code> package, calculate a 95% bootstrap confidence interval for the mean amount of time Americans spend on email weekly. Interpret this interval in context of the data, reporting its endpoints in “humanized” units (e.g. instead of 108 minutes, report 1 hr and 8 minutes). If you get a result that seems a bit odd, discuss why you think this might be the case.</li>

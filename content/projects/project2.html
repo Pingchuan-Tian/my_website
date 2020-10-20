@@ -452,7 +452,10 @@ plot2</code></pre>
 <ul>
 <li>Examine the relationship between <code>gross</code> and <code>rating</code>. Produce a scatterplot, faceted by <code>genre</code> and discuss whether IMDB ratings are likely to be a good predictor of how much money a movie will make at the box office. Is there anything strange in this dataset?</li>
 </ul>
-<pre class="r"><code>plot3&lt;- ggplot(data = movies_3, mapping = aes(x = rating, y = gross))+
+<pre class="r"><code>movies_3&lt;- movies_3%&gt;%
+filter(genre!=&quot;Family&quot;&amp;genre!=&quot;Musical&quot;&amp;genre!=&quot;Romance&quot;&amp;
+       genre!=&quot;Sci-Fi&quot;&amp;genre!=&quot;Thriller&quot;&amp;genre!=&quot;Western&quot;)
+plot3&lt;- ggplot(data = movies_3, mapping = aes(x = rating, y = gross))+
 geom_point() +geom_smooth(se = FALSE)+facet_wrap(~genre)+
 labs(title = &quot;Relationship between Ratings and Gross Earnings &quot;,
 x = &quot;ratings&quot; ,y = &quot;gross earnings in the box office&quot;) +NULL
